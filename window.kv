@@ -1,0 +1,196 @@
+
+<FirstWindow>:
+    name:'first'
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width,root.height
+        Label:
+            text: 'SadTalker GUI'
+            font_size:60
+            halign:'center'
+        BoxLayout:
+            orientation: "horizontal"
+            size: root.width,root.height
+
+            padding: 50
+            spacing:20
+
+            Button:
+                text:'Create WAV Audio'
+                on_release:
+                    app.root.transition.direction = 'left' 
+                    app.root.current = 'second'
+                size_hint:(.5,.5)
+
+            Button:
+                text:'Already have WAV Audio'
+                on_release:
+                    app.root.transition.direction = 'left' 
+                    app.root.current = 'fifth'
+                size_hint:(.5,.5)
+
+<SecondWindow>:
+    name:'second'
+    BoxLayout:
+        size: root.width, root.height
+        orientation:'vertical'
+        GridLayout:
+            cols:2
+            size: root.width, root.height
+    
+            Button:
+                text:'Back'
+                on_press:
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'first'
+                size_hint:(.5,.5)
+            
+            Label:
+                text:'Please wait until you are redirected to the next page, after clicking Create Audio!'
+
+        Label:
+            text: 'Input your test in German or French else, select your audio file below:'
+
+        TextInput: 
+            id: input
+            hint_text:'Enter text'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.705} 
+            size_hint: 0.95, 0.5
+            on_text: root.acceptText() 
+        GridLayout:
+            cols:2
+            padding: 50
+            spacing:20
+
+            Button:
+                text:'German'
+                on_press: root.acceptGerman()
+            Button:
+                text:'French'
+                on_press: root.acceptFrench()
+        Button:
+            text:'Create Audio'
+            on_press: root.runSuno()
+            on_release: 
+                app.root.transition.direction = 'left' 
+                app.root.current = 'third'
+
+
+<ThirdWindow>:
+    name:'third'
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width,root.height
+        GridLayout:
+            cols:2
+            size: root.width,root.height
+            Button:
+                text:'Back'
+                on_press:
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'second'
+                size_hint:(.5,.5)
+            Label:
+                id:state
+                text:'Please wait until you are redirected to the next page, after pressing Create Avatar!'
+        GridLayout:
+            cols:2
+            size: root.width,root.height
+
+            padding:50
+            spacing:20
+            Label:
+                text: 'Source Image: '
+            Button:
+                text: 'Choose file (JPG,PNG)'
+                on_press: root.select_imagefile()
+
+        GridLayout:
+            cols:1
+            size:root.width,root.height
+            padding: 50
+            
+            Button:
+                text: 'Create Avatar'
+                on_press: root.runSadTalker()
+                size_hint:(.5,.2)
+                on_release: 
+                    app.root.transition.direction = 'left' 
+                    app.root.current = 'fourth'
+
+
+<FourthWindow>:
+    name:'fourth'
+    BoxLayout:
+        orientation:'vertical'
+        size:root.width,root.height
+        Label:
+            text:'The link to your AI Avatar video is:'
+            size:root.width,root.height
+        Button:
+            id:link
+            text:'Your Link'
+            on_press:root.openVid()
+        Button:
+            size_hint:(.5,.2)
+            text:'Go to Main Menu'
+            on_press:
+                app.root.transition.direction = 'right' 
+                app.root.current = 'first'
+
+        
+
+<FifthWindow>:
+    name:'fifth'
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width,root.height
+        GridLayout:
+            cols:2
+            size: root.width,root.height
+            Button:
+                text:'Back'
+                on_press:
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'first'
+                size_hint:(.5,.5)
+            Label:
+                id:status
+                text:'Please wait until you are redirected to the next page, after pressing Create Avatar!'
+        GridLayout:
+            cols:2
+            size: root.width,root.height
+
+            padding:50
+            spacing:20
+            Label:
+                text: 'Source Image: '
+            Button:
+                text: 'Choose file (JPG,PNG)'
+                on_press: root.select_imagefile()
+        GridLayout:
+            cols:2
+            size: root.width,root.height
+
+            padding:50
+            spacing:20
+            Label:
+                text:'Driven Audio: '
+            Button:
+                text:'Choose File (WAV)'
+                on_press:root.select_audiofile()
+
+        GridLayout:
+            cols:1
+            size:root.width,root.height
+            padding: 50
+            
+            Button:
+                text: 'Create Avatar'
+                on_press:root.runSadTalker()
+                size:root.width*0.6,root.height*0.8
+                on_release: 
+                    app.root.transition.direction = 'left' 
+                    app.root.current = 'fourth'
+
+   
